@@ -1,31 +1,31 @@
 class Solution {
     public boolean isMonotonic(int[] nums) {
-        int i;
-        if(nums.length<=1)
-        {
+        // An array with 0 or 1 element is always monotonic.
+        if (nums.length <= 1) {
             return true;
         }
-        boolean increasing=true;
-        boolean decreasing=true;
-        for(i=0;i<nums.length-1;i++)
-        {
-            if(nums[i]==nums[i+1])
-            {
-                increasing=true;
-                decreasing=true;
+        
+        // Assume the array is both increasing and decreasing initially.
+        boolean isIncreasing = true;
+        boolean isDecreasing = true;
+        
+        // Iterate through the array, comparing adjacent elements.
+        for (int i = 0; i < nums.length - 1; i++) {
+            // If we find a pair where nums[i] > nums[i+1], it means the array is not non-decreasing.
+            // So, set isIncreasing to false.
+            if (nums[i] > nums[i+1]) {
+                isIncreasing = false;
             }
-            if(nums[i]>nums[i+1])
-            {
-                increasing=false;
-            }
-            if(nums[i]<nums[i+1])
-            {
-                decreasing=false;
+            // If we find a pair where nums[i] < nums[i+1], it means the array is not non-increasing.
+            // So, set isDecreasing to false.
+            if (nums[i] < nums[i+1]) {
+                isDecreasing = false;
             }
         }
-
-        return increasing || decreasing;
-
         
+        // An array is monotonic if it is either entirely non-decreasing OR entirely non-increasing.
+        // If both flags become false, it means the array is neither, and thus not monotonic.
+        return isIncreasing || isDecreasing;
     }
 }
+

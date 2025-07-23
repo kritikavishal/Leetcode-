@@ -1,0 +1,31 @@
+class Solution {
+    public boolean isMonotonic(int[] nums) {
+        int i;
+        if(nums.length<=1)
+        {
+            return true;
+        }
+        boolean increasing=true;
+        boolean decreasing=true;
+        for(i=0;i<nums.length-1;i++)
+        {
+            if(nums[i]==nums[i+1])
+            {
+                increasing=true;
+                decreasing=true;
+            }
+            if(nums[i]>nums[i+1])
+            {
+                increasing=false;
+            }
+            if(nums[i]<nums[i+1])
+            {
+                decreasing=false;
+            }
+        }
+
+        return increasing || decreasing;
+
+        
+    }
+}

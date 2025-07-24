@@ -1,0 +1,25 @@
+class Solution {
+    public int[] constructTransformedArray(int[] nums) {
+        int n=nums.length;
+        int result[]=new int[n];
+        for(int i=0;i<n;i++)
+        {
+            int Curval=nums[i];
+            if(Curval>0)
+            {
+                int new_index=(i+Curval)%n;
+                result[i]=nums[new_index];
+            }
+            else if(Curval<0)
+            {
+                int new_index=(i+Curval%n+n)%n;
+                result[i]=nums[new_index];
+            }
+            else{
+                result[i]=0;
+            }
+        }
+        return result;
+        
+    }
+}

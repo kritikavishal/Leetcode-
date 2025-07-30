@@ -1,0 +1,21 @@
+//problem statement: therre is an array of 2n elements. PArtition that into duplets such that their minimum gives the max sun when added.
+//Logic-First sort the array->min of duplets will ultimately give maximum sum
+//code
+class solution{
+      public int Pairsum(int [] nums)
+{
+    Arrays.sort(nums);
+    int maximum_sum=0;
+    for(int i=0;i<nums.length;i=i+2)
+    {
+    int first_elem=nums[i];
+    int second_elem=nums[i+1];
+    maximum_sum+=Math.min(first_elem,second_elem);
+   }
+return maximum_sum;
+ }
+}
+
+
+
+

@@ -1,0 +1,25 @@
+class solution{
+      public String reverseWords(String s)
+  {
+      //trimming the extra white spaces from whole string
+      String ts=s.trim();
+
+      //breaking the sentence into array of words
+      String [] words=ts.split("//s+");
+
+    //making a new string builder to store the reverssed sentence
+    StringBuilder reult=new StringBuilder();
+
+    for(int i=words.lenght-1;i>=0;i--)
+    {
+      result.append(words[i];
+      if(i>0)
+        {
+          result.append(' ');
+        }
+
+     }
+
+  return result.toString();
+  }
+}

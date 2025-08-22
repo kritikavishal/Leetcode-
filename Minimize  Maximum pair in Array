@@ -1,0 +1,31 @@
+import java.util.Arrays;
+
+class Solution {
+    public int minPairSum(int[] nums) {
+        // 1. Sort the array in non-decreasing order.
+        Arrays.sort(nums);
+
+        // 2. Initialize pointers and a variable to track the maximum pair sum.
+        int n = nums.length;
+        int left = 0;
+        int right = n - 1;
+        int maxPairSum = 0; // We can initialize to 0 since pair sums will be positive.
+
+        // 3. Loop until the pointers meet in the middle.
+        while (left < right) {
+            // 4. Calculate the sum of the current pair (smallest available + largest available).
+            int currentPairSum = nums[left] + nums[right];
+
+            // 5. Update the maximum pair sum found so far.
+            // We use Math.max to keep our code concise.
+            maxPairSum = Math.max(maxPairSum, currentPairSum);
+
+            // 6. Move the pointers inward to process the next pair.
+            left++;
+            right--;
+        }
+
+        // 7. Return the minimized maximum pair sum.
+        return maxPairSum;
+    }
+}

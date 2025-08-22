@@ -1,0 +1,40 @@
+import java.util.Arrays;
+
+class Solution {
+    public int numSubseq(int[] nums, int target) {
+        int n = nums.length;
+        int MOD = 1_000_000_007;
+
+        // Sort the array once. (Removed the redundant second sort)
+        Arrays.sort(nums);
+
+        // --- FIX for Power Calculation ---
+        int[] powers = new int[n];
+        
+        // 1. Set the base case: 2^0 = 1
+        powers[0] = 1;
+        
+        // 2. Start the loop from i = 1 to avoid the out-of-bounds error.
+        for (int i = 1; i < n; i++) {
+            powers[i] = (powers[i - 1] * 2) % MOD;
+        }
+        // --- End of FIX ---
+
+        int right = n - 1;
+        int left = 0;
+        int count = 0;
+
+        // The rest of your logic is correct!
+        while (left <= right) {
+            if (nums[left] + nums[right] > target) {
+                right--;
+            } else {
+                // Correctly calculates the number of subsequences
+                int subsequences = powers[right - left];
+                count = (count + subsequences) % MOD;
+                left++;
+            }
+        }
+        return count;
+    }
+}

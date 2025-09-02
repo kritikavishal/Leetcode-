@@ -1,0 +1,31 @@
+//code to find the sUM OF squares of a number
+class Solution {
+private:
+    int getNext(int n)
+    {
+        int sum=0;
+        while(n>0)
+        {
+            int digit=n%10;
+            sum+=digit*digit;
+            n/=10;
+        }
+        return sum;
+    }
+//slow will head to the first number of cycle
+//fast will point to next to next number
+public:
+    bool isHappy(int n) {
+        int slow=n;
+        int fast=getNext(n);
+
+        while(fast!=1 && slow!=fast)
+//the loop will run until fast is not eual to 1 and slow and fast are not equal
+        {
+            slow=getNext(slow);
+            fast=getNext(getNext(fast));
+        }
+//once fast is equal to 1 then the number is happy so return true else false
+        return fast==1;
+    }
+};

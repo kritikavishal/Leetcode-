@@ -1,0 +1,36 @@
+
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        ListNode* slow=head;
+        ListNode* fast=head;
+        if(head==NULL ||(head->next==NULL))
+            return NULL;
+
+        while(fast!=NULL && fast->next!=NULL)
+        //the slow pointer will take one step and the fast wwill take two steps
+        //if both are poiting to the same node then there exists a cycle
+        //for finding the node from where cycle begins is to take 2 poimters and back rack it kinda
+        {
+            slow=slow->next;
+            fast=fast->next->next;
+            if(slow==fast)
+            {
+                break;
+            }
+        }
+        if(slow!=fast)
+        {
+            return NULL;
+        }
+
+        ListNode* P=head;
+        while(P!=slow)
+        {
+            P= P->next;
+            slow=slow->next;
+        }
+        
+        return P;
+    }
+};

@@ -1,0 +1,16 @@
+//to find the middle node
+//the thing is that by the time fast will reach the end of nodes slow will rech the middl of the node
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        ListNode* slow=head;
+        ListNode* fast=head;
+
+        while(fast!=NULL && (fast->next!=NULL))
+        {
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        return slow;
+    }
+};

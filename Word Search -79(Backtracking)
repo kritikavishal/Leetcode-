@@ -1,0 +1,42 @@
+class Solution {
+    public boolean exist(char[][] board, String word) {
+        int m = board.length;
+        int n = board[0].length;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (board[i][j] == word.charAt(0)) {
+                    //if the first letter of word we find then we go in directions to find whether the whole word exits or not 
+                    //for that we intitalize find function
+                    if (find(board, word, 0, i, j, m, n)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean find(char[][] board, String word, int idx, int i, int j, int m, int n) {
+        if (idx == word.length()) return true;  // checks all the indices and its matching the characters of the word.
+        if (i < 0 || j < 0 || i >= m || j >= n || board[i][j] != word.charAt(idx)) {
+            return false;
+        }
+    //backtracking code
+        char temp = board[i][j];
+        board[i][j] = '$'; // mark visited
+
+        int[][] dirs = {{1,0},{-1,0},{0,1},{0,-1}};
+        for (int[] d : dirs) {
+            int newI = i + d[0];
+            int newJ = j + d[1];
+            // d[0] and d[1] are row/col movemnets from dirs
+            if (find(board, word, idx + 1, newI, newJ, m, n)) {
+                return true; //checking for next node when 1st char matches
+            }
+        }
+
+        board[i][j] = temp; // backtrack
+        return false;
+    }
+}

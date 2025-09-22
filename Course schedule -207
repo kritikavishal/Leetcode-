@@ -1,0 +1,34 @@
+import java.util.*;
+
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        // build adjacency list for all courses (0 .. numCourses-1)
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+        for (int i = 0; i < numCourses; i++) graph.put(i, new ArrayList<>());
+
+        // edge: pre[1] -> pre[0]
+        for (int[] pre : prerequisites) {
+            graph.get(pre[1]).add(pre[0]);
+        }
+
+        int[] visited = new int[numCourses]; // 0 = unvisited, 1 = visiting, 2 = done
+
+        for (int i = 0; i < numCourses; i++) {
+            if (!dfs(i, graph, visited)) return false;
+        }
+        return true;
+    }
+
+    // helper method must be INSIDE the Solution class
+    private boolean dfs(int course, Map<Integer, List<Integer>> graph, int[] visited) {
+        if (visited[course] == 1) return false; // found cycle
+        if (visited[course] == 2) return true;  // already processed
+
+        visited[course] = 1; // mark visiting
+        for (int next : graph.get(course)) {
+            if (!dfs(next, graph, visited)) return false;
+        }
+        visited[course] = 2; // mark done
+        return true;
+    }
+}

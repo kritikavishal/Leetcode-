@@ -1,0 +1,38 @@
+import java.util.Stack;
+
+class MyQueue {
+    Stack<Integer> inp = new Stack<>(); //for push elements
+    Stack<Integer> oup = new Stack<>(); //for pop and peek
+    int peekEl = -1;
+
+    public MyQueue() {
+    }
+
+    public void push(int x) {
+        if (inp.isEmpty()) {
+            peekEl = x;
+        }
+        inp.push(x);
+    }
+
+    public int pop() {
+        if (oup.isEmpty()) {
+            // transfer elements from inp to oup
+            while (!inp.isEmpty()) {
+                oup.push(inp.pop());
+            }
+        }
+        return oup.pop();
+    }
+
+    public int peek() {
+        if (oup.isEmpty()) {
+            return peekEl;
+        }
+        return oup.peek();
+    }
+
+    public boolean empty() {
+        return inp.isEmpty() && oup.isEmpty();
+    }
+}

@@ -1,0 +1,31 @@
+import java.util.*;
+
+class Solution {
+    public String simplifyPath(String path) {
+        String[] tk = path.split("/");    // Split path by "/"
+        Stack<String> st = new Stack<>(); // Stack to manage directories
+
+        for (String token : tk) {
+            if (token.equals("") || token.equals(".")) {
+                // Ignore empty strings and current directory
+                continue;
+            } else if (token.equals("..")) {
+                // Go one level up (if possible)
+                if (!st.isEmpty())
+                    st.pop();
+            } else {
+                // Push valid directory name
+                st.push(token);
+            }
+        }
+
+        // Build final simplified path
+        StringBuilder res = new StringBuilder();
+        for (String dir : st) {
+            res.append("/").append(dir);
+        }
+
+        // If stack empty, path is root "/"
+        return res.length() == 0 ? "/" : res.toString();
+    }
+}

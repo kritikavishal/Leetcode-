@@ -1,0 +1,33 @@
+class Solution {
+    public String removeStars(String s) {
+        Stack <Character> st=new Stack<>();
+      //intialize a stack of characters as char wld be operated on
+        int i=0;
+        int n=s.length();
+        for(i=0;i<n;i++)
+        {   
+            char ch=s.charAt(i);
+            
+            if(ch=='*')
+            {
+              //when the char is star we will pop the peek char since the left char has to be removed
+               if(!st.isEmpty())
+                { 
+                 st.pop();
+                }
+            }
+            else
+            {
+              //in case it is a normal character we will push on the stack
+                st.push(ch);
+            }
+            
+        }
+        StringBuilder sb=new StringBuilder();
+        for(char c:st)
+        {
+            sb.append(c);
+        }
+        return sb.toString();
+    }
+}

@@ -1,0 +1,36 @@
+import java.util.*;
+
+public class InversionCounter {
+
+    // Declare the total sum variable here so the method can access it
+    public static int totalSumOfelements = 0;
+
+    public static int getInversionCount(int[] arr) {
+        int n = arr.length;
+        int count = 0;
+        
+        // Fixed loop boundaries to avoid crashing and correctly count inversions
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (arr[i] > arr[j]) {
+                    count++;
+                }
+            }
+        }
+        
+        // Accumulate the count into the total sum
+        totalSumOfelements += count;
+        
+        // Fixed capitalization, removed comma, and fixed string concatenation
+        System.out.println("the total sum is " + totalSumOfelements);
+        
+        // Added the missing return statement
+        return count;
+    }
+
+    public static void main(String[] args) {
+        // Test example
+        int[] arr = {8, 4, 2, 1};
+        getInversionCount(arr);
+    }
+}

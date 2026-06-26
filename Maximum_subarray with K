@@ -1,0 +1,29 @@
+class Solution {
+    public int longestSubarray(int[] arr, int k) {
+        // code here
+        int[] ArrayList<> arr_list=new ArrayList<>();
+        cursum=0;
+        maxsum=0;
+        //SLIDING WINDOW PROBLEM- 
+        INCREASE THE SIZE OF WINDOW AND DECRESE  FROMM LEFT IF CURSUM<K
+
+        int right=0;
+        int left=0;
+        for(int i=0;i<arr.len;i++)
+        {
+            cursum+=arr[right];
+            
+            while cursum<k{
+                cursum-=arr[left];
+                left++;
+            }
+            if(cursum==k)
+            {
+                maxsum=left+right-1;
+                maxsum=max(cursum,maxsum)
+            }
+        }
+        return maxsum;
+        
+    }
+}

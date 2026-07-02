@@ -1,0 +1,26 @@
+class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int curStreak=0;
+        int maxStreak=0;
+//curStreak to count the number of ones
+//maxStreak to count the number of maximum streak,if the loop ccontains 0 the cur streak set back to zero.
+        for(int l=nums.length-1;l>=0;l--)
+        {
+            if(nums[l]==1)
+            {
+                curStreak+=1;
+                if(curStreak>maxStreak)
+                {
+                    maxStreak=curStreak;
+                }
+
+            }
+            else if(nums[l]==0)
+            {
+                curStreak=0;
+            }
+        }
+        return maxStreak;
+        
+    }
+}

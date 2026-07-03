@@ -1,4 +1,39 @@
-return Integer.compare(m1.id, m2.id);
+
+
+
+class Solution {
+    // A helper class to bind start time, end time, and original position together
+    static class Meeting {
+        int start;
+        int end;
+        int id;
+
+        Meeting(int start, int end, int id) {
+            this.start = start;
+            this.end = end;
+            this.id = id;
+        }
+    }
+
+    public ArrayList<Integer> maxMeetings(int[] s, int[] f) {
+        ArrayList<Integer> res = new ArrayList<>();
+        int n = s.length;
+        ArrayList<Meeting> meetings = new ArrayList<>();
+
+        // 1. Create meeting objects with 1-based indexing (standard for this problem)
+        for (int i = 0; i < n; i++) {
+            meetings.add(new Meeting(s[i], f[i], i + 1));
+        }
+
+        // 2. Sort meetings based on their finishing times
+        // If finish times are identical, sort by their original appearance/id
+        Collections.sort(meetings, new Comparator<Meeting>() {
+            @Override
+            public int compare(Meeting m1, Meeting m2) {
+                if (m1.end != m2.end) {
+                    return Integer.compare(m1.end, m2.end);
+                }
+                return Integer.compare(m1.id, m2.id);
             }
         });
 
@@ -25,4 +60,3 @@ return Integer.compare(m1.id, m2.id);
         return res;
     }
 }
-

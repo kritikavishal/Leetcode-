@@ -1,0 +1,28 @@
+return Integer.compare(m1.id, m2.id);
+            }
+        });
+
+        // 3. Greedily select meetings
+        if (!meetings.isEmpty()) {
+            // The first meeting in the sorted list always finishes first, so we take it
+            Meeting firstMeeting = meetings.get(0);
+            res.add(firstMeeting.id);
+            int lastFinishTime = firstMeeting.end;
+
+            // Check the rest of the meetings
+            for (int i = 1; i < n; i++) {
+                Meeting current = meetings.get(i);
+                if (current.start > lastFinishTime) {
+                    res.add(current.id);
+                    lastFinishTime = current.end; // Update the timeline
+                }
+            }
+        }
+
+        // Optional: Sort result if the problem requires indices in increasing order
+        // Collections.sort(res); 
+
+        return res;
+    }
+}
+

@@ -1,0 +1,39 @@
+import java.util.Arrays;
+
+public class Solution { // Corrected class declaration
+
+    // Added proper method declaration with an 'int' return type
+    public int minPlatform(int arr[], int dep[]) { 
+        
+        int n = arr.length; // Corrected: .length instead of .length()
+        
+        // Sort the arrival and departure times
+        Arrays.sort(arr);
+        Arrays.sort(dep);
+        
+        // Pointers to track arrival and departure
+        int i = 0;
+        int j = 0;
+        
+        int pltf_needed = 0;
+        int max_pltf = 0;
+        
+        while (i < n && j < n) {
+            if (arr[i] <= dep[j]) {
+                pltf_needed += 1;
+                i++;
+            } 
+            else {
+                pltf_needed -= 1;
+                j++;
+            }
+            
+            if (pltf_needed > max_pltf) {
+                max_pltf = pltf_needed;
+            }
+            // REMOVED premature return from here
+        }
+        
+        return max_pltf; // Placed correctly outside the while loop
+    }
+}

@@ -1,0 +1,23 @@
+class solution{
+      public static class(Student[] ,Cookie[])
+      {
+          int m=Student.size;
+          int n=Student.size;
+//sorting the array to find the job
+          Arrays.sort(Student);
+          Arrays.sort(Cookie);
+
+          int l=0;
+          //left pointer
+          int r=0;
+          //right pointer
+          while(l<r)
+          {
+              if(Student[l]<=Cookie[r])
+              {
+                  r+=1;
+              }
+              l+=1;
+        }
+return r;
+}

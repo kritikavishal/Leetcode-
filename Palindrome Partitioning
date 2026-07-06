@@ -1,0 +1,47 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class Solution { // Fix: Capital 'S' for class name to follow Java naming conventions
+    
+    public List<List<String>> partition(String s) { // Fix: Removed extra '<'
+        List<List<String>> ans = new ArrayList<>();
+        findPartitions(0, s, ans, new ArrayList<>());
+        return ans;
+    }
+
+    // Fix: Added proper method body braces {}
+    private void findPartitions(int start, String s, List<List<String>> ans, List<String> currentPath) {
+        // Fix: Added () to s.length()
+        if (start == s.length()) {
+            ans.add(new ArrayList<>(currentPath));
+            return;
+        }
+        
+        for (int i = start; i < s.length(); i++) {
+            // Fix: Correctly called the helper method passing parameters
+            if (isPalindrome(s, start, i)) {
+                // Fix: Grab the valid palindrome substring
+                currentPath.add(s.substring(start, i + 1));
+                
+                // Recurse to process the remaining part of the string
+                findPartitions(i + 1, s, ans, currentPath);
+                
+                // Backtrack: Remove the last added substring to try different cuts
+                currentPath.remove(currentPath.size() - 1);
+            }
+        }
+    }
+
+    // Fix: Turned 'class isPalindrome' into a proper private helper method
+    private boolean isPalindrome(String s, int left, int right) {
+        while (left < right) {
+            // Fix: Logic correction (return false if characters do NOT match)
+            if (s.charAt(left) != s.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true; // Fix: lowercase 'true' in Java
+    }
+}

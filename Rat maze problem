@@ -1,0 +1,54 @@
+class solution:
+  
+    def findPath(self, grid):
+        # Edge case: If the starting point or ending point is blocked (0), no path exists
+        if not grid or grid[0][0] == 0 or grid[-1][-1] == 0:
+            return []
+
+        n = len(grid)
+        paths = []
+        visited = set() # To keep track of cells we've already stepped on
+
+        # Helper function for backtracking
+        def backtrack(r, c, current_path):
+            # Base Case: We reached the bottom-right corner (n-1, n-1)
+            if r == n - 1 and c == n - 1:
+                paths.append("".join(current_path))
+                return
+
+            # Mark current cell as visited
+            visited.add((r, c))
+
+            # Define the 4 possible moves: Down, Left, Right, Up (Lexicographical order)
+            directions = {
+                'D': (1, 0),
+                'L': (0, -1),
+                'R': (0, 1),
+                'U': (-1, 0)
+            }
+
+            # Try all 4 directions
+            for move_name, (dr, dc) in directions.items():
+                new_r, new_c = r + dr, c + dc
+
+                # Check if the next move is valid (within bounds, open path, not visited)
+                if (0 <= new_r < n and 
+                    0 <= new_c < n and 
+                    grid[new_r][new_c] == 1 and 
+                    (new_r, new_c) not in visited):
+                    
+                    # 1. Choose (add move to path)
+                    current_path.append(move_name)
+                    
+                    # 2. Explore (recurse)
+                    backtrack(new_r, new_c, current_path)
+                    
+                    # 3. Un-choose (backtrack)
+                    current_path.pop()
+
+            # Unmark the current cell before returning so other paths can use it
+            visited.remove((r, c))
+
+        # Start the backtracking process from (0, 0)
+        backtrack(0, 0, [])
+        return paths

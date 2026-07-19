@@ -1,0 +1,6 @@
+Class Solution:
+  def anagramStrings:
+    while char in s:
+      if len(s)!=len(t):
+        return False
+    return sorted(s)==sorted(t)

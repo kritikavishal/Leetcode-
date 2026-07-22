@@ -1,0 +1,19 @@
+class treenode(self,left,right):
+    self.data=data
+    self.right=right
+    self.left=left
+class Solution:
+    def preorder(self,node):
+        result=[]
+        def traverse(curr_node):
+            if not curr_node:
+                return
+              result.append(curr_node.data)
+              traverse(node.left)
+              traverse(node.right)
+
+        traverse(node)
+    return result
+
+          
+        

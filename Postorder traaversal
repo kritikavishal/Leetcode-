@@ -1,0 +1,25 @@
+class Solution:
+    def postorder(self, root):
+        # 1. Initialize the list to store the final output
+        result = []
+        
+        # 2. Define the recursive helper function
+        def recursive(curr_node):
+            # Base case: if the node is empty (None), stop and return
+            if not curr_node:
+                return
+            
+            # Step 1: Traverse the LEFT subtree
+            recursive(curr_node.left)
+            
+            # Step 2: Traverse the RIGHT subtree
+            recursive(curr_node.right)
+            
+            # Step 3: Visit the NODE (append its data)
+            result.append(curr_node.data)
+
+        # 3. Start the recursion by passing in the root
+        recursive(root)
+        
+        # 4. Return the populated list
+        return result

@@ -1,0 +1,35 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.data = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def widthOfBinaryTree(self, root):
+        self.max_width = 0
+        
+        # Dictionary to store the index of the first (leftmost) node at each level
+        # Format: {level: first_index}
+        first_indexes = {}
+        
+        def dfs(node, level, index):
+            if not node:
+                return
+                
+            # If this is the first time we've reached this level, record its index
+            if level not in first_indexes:
+                first_indexes[level] = index
+                
+            # Calculate the width from the leftmost node to the current node
+            current_width = index - first_indexes[level] + 1
+            self.max_width = max(self.max_width, current_width)
+            
+            # Traverse left and right
+            dfs(node.left, level + 1, 2 * index + 1)
+            dfs(node.right, level + 1, 2 * index + 2)
+            
+        # Start DFS at level 0, index 0
+        dfs(root, 0, 0)
+        
+        return self.max_width

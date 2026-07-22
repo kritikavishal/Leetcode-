@@ -1,0 +1,14 @@
+class Solution:
+    def getInorder(self, root):
+        result = []
+        
+        def traverse(curr_node):
+            if not curr_node:
+                return
+            
+            traverse(curr_node.left)
+            result.append(curr_node.data)
+            traverse(curr_node.right)
+            
+        traverse(root)
+        return result

@@ -1,0 +1,25 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.data = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def allRoottoLeaf(self,root):
+        res=[]
+        if not root:
+            return res
+        def dfs(node,current_path):
+            if not node:
+                return
+            current_path.append(node.data)
+
+            if not node.left and not node.right:
+                res.append(list(curernt_path))
+            else:
+                dfs(node.left,current_path)
+                dfs(node.right,current_path)
+            current_path.pop()
+        dfs(root,[])
+
+        return res
